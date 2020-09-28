@@ -21,7 +21,7 @@ public class DetailActivity extends AppCompatActivity {
     public static final String SHARE_DESCRIPTION = "Look at this delicious candy from Candy Coded - ";
     public static final String HASHTAG_CANDYCODED = " #candycoded";
     public static String mCandyImageUrl = "";
-    public static String data = SHARE_DESCRIPTION + mCandyImageUrl + HASHTAG_CANDYCODED;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,13 +76,16 @@ public class DetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        createShareIntent();
         return super.onOptionsItemSelected(item);
     }
 
     private void createShareIntent(){
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, data);
+
+        String shareString = SHARE_DESCRIPTION + mCandyImageUrl + HASHTAG_CANDYCODED;
+        shareIntent.putExtra(Intent.EXTRA_TEXT, shareString);
         startActivity(shareIntent);
     }
 }
